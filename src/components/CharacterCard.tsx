@@ -1,34 +1,38 @@
-import { ReactElement } from 'react'
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
-interface Props {
-    character:{
-        id:number,
-        name:string,
-        image:string,
-        status:string,
-        gender:string,
-        species:string,
-        location:{
-            name:string
-        }
-    },handleClick: (char: object) => void;
+interface Card {
+  character: {
+    id: number,
+    name: string,
+    image: string,
+    status: string,
+    gender: string,
+    species: string,
+    location: {
+      name: string
+    }
+  },
+  handleClick: (char: object) => void;
 }
+type P = { handleClick: (char: any) => void; key: string; character: any; }
 
-export default function CharacterCard({character,handleClick}: Props): ReactElement {
- const handl=()=>{
+const CharacterCard: React.FC<Card & RouteComponentProps<any>> = ({ character, handleClick, history }) => {
+  const characterClickHandler = () => {
+    history.push(`/${character.name.split(' ').join('_')}_${character.id}`, { character })
     handleClick(character)
- }
-    return (
-        <>
-          <div className="character" onClick={handl}>
-            <img className="avatar" src={character.image} alt={`${character.name} image`}/>
-            <h3>{character.name}</h3>
-            <p>Status: {character.status}</p>
-            <p>Gender: {character.gender}</p>
-            <p>Species: {character.species}</p>
-            <p>Location: {character.location?.name}</p>
-          </div>
+  }
+  return (
+    <>
+      <div className="character" onClick={characterClickHandler}>
+        <img className="avatar" src={character.image} alt={`${character.name} image`} />
+        <h3>{character.name}</h3>
+        <p>Status: {character.status}</p>
+        <p>Gender: {character.gender}</p>
+        <p>Species: {character.species}</p>
+        <p>Location: {character.location?.name}</p>
+      </div>
 
-        </>
-    )
+    </>
+  )
 }
+export default withRouter(CharacterCard)

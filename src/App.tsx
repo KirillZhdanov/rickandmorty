@@ -1,41 +1,25 @@
 import React from 'react';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
-import { fetchCharacters } from "./redux/actions/actions";
-import CharacterCard from "./components/CharacterCard";
+import AdditionalInfoPage from './pages/AdditionalInfoPage';
+import MainPage from './pages/MainPage';
+
+
 
 
 function App() {
-  const charactersApiInfo=useSelector<any,any>((state)=>state.charactersInfoReducer.characters);
-  const charactersInfo=charactersApiInfo.results;
-  const fetchInfo=charactersApiInfo.info;
-  const nextPage=fetchInfo?.next?.match(/\d+/g)||1;
-  const dispatch = useDispatch();
- // const rndPage=Math.floor(Math.random() * Math.floor(30));
-  const [noData, setNoData] = React.useState(false);
-  React.useEffect(() => {
-  dispatch(fetchCharacters(nextPage))
-  }, [noData])
-  window.onscroll = () => {
-    if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight*0.8) {
-      setNoData(!noData)
-      console.log("SCROLL")
-    }
-  }
-  const handleClick=React.useCallback((char)=>{
-    console.log(char)
-  },[]);
- console.log("info",charactersInfo,fetchInfo)
+  const charactersApiInfo = useSelector<any, any>((state) => state.charactersInfoReducer.characters);
+  const charactersInfo = charactersApiInfo.results;
+  const fetchInfo = charactersApiInfo.info;
+
+  console.log("info", charactersInfo, fetchInfo)
   return (
     <div className="App">
-      <div className="charactersList"  >
-      {
-        charactersInfo.map((character:any,idx:number) => (
-          Object.keys(character).length?<CharacterCard handleClick={handleClick} key={`${character.name}_${character.id}_${idx}`} character={character} />:null
-          ))
-      
-      }
-      </div>
+      <Switch>
+        <Route exact path="/" render={() => <MainPage charactersInfo={charactersInfo} fetchInfo={fetchInfo} />} />
+        <Route path="/:character" component={AdditionalInfoPage} />
+      </Switch>
     </div>
   );
 }
