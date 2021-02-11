@@ -13,6 +13,20 @@ interface Props {
     },
 }
 
+interface ICharacter {
+    id?: number,
+    name?: string,
+    image?: string,
+    status?: string,
+    gender?: string,
+    species?: string,
+    location?: {
+        name: string;
+    },
+
+};
+
+
 const MainPage: React.FC<Props> = ({ charactersInfo, fetchInfo }) => {
 
     const nextPage = Number(fetchInfo?.next?.match(/\d+/g) || 1);
@@ -57,7 +71,7 @@ const MainPage: React.FC<Props> = ({ charactersInfo, fetchInfo }) => {
         <>
             <div className="charactersList"  >
                 {
-                    charactersInfo.map((character: any) => (
+                    charactersInfo.map((character: ICharacter) => (
                         Object.keys(character).length ? <CharacterCard handleClick={handleClick} key={character.id} character={character} /> : null
                     ))
 

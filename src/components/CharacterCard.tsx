@@ -2,13 +2,13 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 
 interface Card {
   character: {
-    id: number;
-    name: string;
-    image: string;
-    status: string;
-    gender: string;
-    species: string;
-    location: {
+    id?: number;
+    name?: string;
+    image?: string;
+    status?: string;
+    gender?: string;
+    species?: string;
+    location?: {
       name: string;
     };
   };
@@ -22,7 +22,7 @@ const CharacterCard: React.FC<Card & RouteComponentProps<RouteParams>> = ({
   history,
 }) => {
   const characterClickHandler = () => {
-    history.push(`/${character.name.split(" ").join("_")}_${character.id}`, {
+    history.push(`/${String(character.name).split(" ").join("_")}_${character.id}`, {
       character,
     });
     handleClick(character);
