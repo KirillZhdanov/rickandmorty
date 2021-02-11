@@ -5,8 +5,6 @@ import { ArrowBack } from "@styled-icons/boxicons-regular";
 
 
 const AdditionalInfoPage: React.FC = ({ }) => {
-
-
     const Location = useLocation();
     const char = JSON.parse(JSON.stringify(Location.state))
     return (

@@ -24,4 +24,9 @@ const StyledSubTitle = styled.h3`
     font-size: 1rem;
   }
 `
-export { StyledImage, StyledLink, StyledSubTitle }
+
+const Loader = styled.div`
+    width: 100%;
+    height: 170px;
+    `;
+export { StyledImage, StyledLink, StyledSubTitle, Loader }
