@@ -1,26 +1,52 @@
-import React from 'react'
-import { useLocation, Link } from 'react-router-dom';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchById } from "../redux/actions/actions";
+import { Link } from 'react-router-dom';
 import { StyledLink, StyledImage, StyledSubTitle } from "../components/StyledComponents";
 import { ArrowBack } from "@styled-icons/boxicons-regular";
+import { RootState } from '../redux/store';
+import { Match } from "../interfaces";
 
 
-const AdditionalInfoPage: React.FC = ({ }) => {
-    const Location = useLocation();
-    const char = JSON.parse(JSON.stringify(Location.state))
+type TSelected = {
+    characterByIDReducer: {
+        id: number,
+        name: string,
+        image: string,
+        status: string,
+        gender: string,
+        species: string,
+        location: {
+            name: string;
+        },
+    }
+};
+const AdditionalInfoPage: React.FC<Match> = ({ match }) => {
+    const character = useSelector((state: RootState | TSelected) => state.characterByIDReducer);
+    const dispatch = useDispatch();
+    const [visible, setVisible] = React.useState(false);
+    React.useEffect(() => {
+        const characterId = Number.parseInt(match.url.substring(1));
+        dispatch(fetchById(characterId));
+        setTimeout(() => {
+            setVisible(true);
+        }, 500);
+    }, [])
+
     return (
-        <div>
+        visible ? (<div>
             <StyledLink as={Link} to="/"><ArrowBack size={18} /> Back</StyledLink>
             <div>
-                <StyledImage className="avatar" src={char.character.image} alt={`${char.character.name} image`} />
+                <StyledImage className="avatar" src={character.image} alt={`${character.name} image`} />
             </div>
-            <StyledSubTitle>{char.character.name}</StyledSubTitle>
+            <StyledSubTitle>{character.name}</StyledSubTitle>
             <div>
-                <p>Status: {char.character.status}</p>
-                <p>Gender: {char.character.gender}</p>
-                <p>Species: {char.character.species}</p>
-                <p>Location: {char.character.location?.name}</p>
+                <p>Status: {character.status}</p>
+                <p>Gender: {character.gender}</p>
+                <p>Species: {character.species}</p>
+                <p>Location: {character.location?.name}</p>
             </div>
-        </div>
+        </div>) : <div className="lds-dual-ring" style={{ position: "absolute", top: "50%", }}></div>
     )
 }
 

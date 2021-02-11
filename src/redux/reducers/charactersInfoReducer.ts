@@ -1,4 +1,5 @@
 import { SET_CHARACTERS } from "../actions/actions";
+import { CharactersAction } from "../../interfaces";
 
 const initialState = {
   characters: {
@@ -6,14 +7,11 @@ const initialState = {
     results: [{}],
   },
 };
-interface Action {
-  type: string;
-  payload: {
-    info: {};
-    results: [{}];
-  };
-}
-export const charactersInfoReducer = (state = initialState, action: Action) => {
+
+export const charactersInfoReducer = (
+  state = initialState,
+  action: CharactersAction
+) => {
   switch (action.type) {
     case SET_CHARACTERS:
       return {

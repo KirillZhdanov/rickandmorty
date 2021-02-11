@@ -1,32 +1,19 @@
 import { withRouter, RouteComponentProps } from "react-router-dom";
+import { Card } from "../interfaces"
 
-interface Card {
-  character: {
-    id?: number;
-    name?: string;
-    image?: string;
-    status?: string;
-    gender?: string;
-    species?: string;
-    location?: {
-      name: string;
-    };
-  };
-  handleClick: (char: object) => void;
-}
+
 
 type RouteParams = { id: string };
 const CharacterCard: React.FC<Card & RouteComponentProps<RouteParams>> = ({
   character,
-  handleClick,
   history,
 }) => {
   const characterClickHandler = () => {
-    history.push(`/${String(character.name).split(" ").join("_")}_${character.id}`, {
+    history.push(`/${character.id}`, {
       character,
     });
-    handleClick(character);
   };
+
   return (
     <>
       <div className="character" onClick={characterClickHandler}>
