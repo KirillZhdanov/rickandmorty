@@ -5,24 +5,12 @@ import { Link } from 'react-router-dom';
 import { StyledLink, StyledImage, StyledSubTitle, LoaderCenter } from "../components/StyledComponents";
 import { ArrowBack } from "@styled-icons/boxicons-regular";
 import { RootState } from '../redux/store';
-import { Match } from "../interfaces";
+import { Match, TSelectedById } from "../models";
 
 
-type TSelected = {
-    characterByIDReducer: {
-        id: number,
-        name: string,
-        image: string,
-        status: string,
-        gender: string,
-        species: string,
-        location: {
-            name: string;
-        },
-    }
-};
+
 const AdditionalInfoPage: React.FC<Match> = ({ match }) => {
-    const character = useSelector((state: RootState | TSelected) => state.characterByIDReducer);
+    const character = useSelector((state: RootState | TSelectedById) => state.characterByIDReducer);
     const dispatch = useDispatch();
 
     const visible = (character.name.length > 0);

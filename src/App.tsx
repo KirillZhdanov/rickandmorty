@@ -9,7 +9,6 @@ function App() {
         <Route exact path="/" component={MainPage} />
         <Route path="/:character" component={AdditionalInfoPage} />
       </Switch>
-
     </div>
   );
 }

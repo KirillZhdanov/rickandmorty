@@ -5,7 +5,7 @@ import {
   FETCH_BY_ID,
   setById,
 } from "../actions/actions";
-import { Page, Id } from "../../interfaces";
+import { Page, Id } from "../../models";
 
 const fetchCharactersFromApi = (page: number) => {
   console.log("Page to fetch:", page);
@@ -18,18 +18,18 @@ const fetchCharacterById = (id: number) => {
 
 function* fetchCharactersWorker(action: Page) {
   try {
-    const data = yield call(fetchCharactersFromApi, action.page);
-    const json = yield call(() => new Promise((res) => res(data.json())));
-    yield put(setCharacters(json));
+    const response = yield call(fetchCharactersFromApi, action.page);
+    const data = yield response.json();
+    yield put(setCharacters(data));
   } catch (error) {
     throw new Error(`Fetch failed: ${error}`);
   }
 }
 function* fetchCharacterByIdWorker(action: Id) {
   try {
-    const data = yield call(fetchCharacterById, action.id);
-    const json = yield call(() => new Promise((res) => res(data.json())));
-    yield put(setById(json));
+    const response = yield call(fetchCharacterById, action.id);
+    const data = yield response.json();
+    yield put(setById(data));
   } catch (error) {
     throw new Error(`Fetch failed: ${error}`);
   }

@@ -1,7 +1,7 @@
 import {
   CharacterByIdActionPayload,
   CharactersActionPayload,
-} from "../../interfaces";
+} from "../../models";
 export const SET_CHARACTERS = "SET_CHARACTERS";
 export const SET_BY_ID = "SET_BY_ID";
 export const FETCH_CHARACTERS = "FETCH_CHARACTERS";

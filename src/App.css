@@ -2,17 +2,10 @@
   text-align: center;
 }
 
-.character {
-  border: 1px solid black;
-  margin: 10px auto;
-}
 .charactersList {
   height: 100%;
   display: flex;
   flex-wrap: wrap;
-}
-.avatar {
-  width: 100%;
 }
 
 @media only screen and (min-width: 950px) {

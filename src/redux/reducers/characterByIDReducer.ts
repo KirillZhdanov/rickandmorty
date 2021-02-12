@@ -1,7 +1,7 @@
 import { SET_BY_ID } from "../actions/actions";
-import { CharacterByIdAction } from "../../interfaces";
+import { CharacterByIdAction, Character } from "../../models";
 
-const initialStateById = {
+const initialStateById: Character = {
   id: 1,
   name: "",
   image: "",
@@ -14,7 +14,7 @@ const initialStateById = {
 };
 
 export const characterByIDReducer = (
-  state = initialStateById,
+  state: Character = initialStateById,
   action: CharacterByIdAction
 ) => {
   switch (action.type) {

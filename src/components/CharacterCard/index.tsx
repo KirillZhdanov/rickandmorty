@@ -1,9 +1,9 @@
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { Card } from "../interfaces"
+import { Card, RouteParams } from "../../models"
+import { StyledSubTitle, StyledImage } from "../StyledComponents";
+import "./styles.css"
 
 
-
-type RouteParams = { id: string };
 const CharacterCard: React.FC<Card & RouteComponentProps<RouteParams>> = ({
   character,
   history,
@@ -17,12 +17,12 @@ const CharacterCard: React.FC<Card & RouteComponentProps<RouteParams>> = ({
   return (
     <>
       <div className="character" onClick={characterClickHandler}>
-        <img
+        <StyledImage
           className="avatar"
           src={character.image}
           alt={`${character.name} image`}
         />
-        <h3>{character.name}</h3>
+        <StyledSubTitle>{character.name}</StyledSubTitle>
         <p>Status: {character.status}</p>
         <p>Gender: {character.gender}</p>
         <p>Species: {character.species}</p>

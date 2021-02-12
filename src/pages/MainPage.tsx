@@ -4,31 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCharacters } from "../redux/actions/actions";
 import { Loader } from "../components/StyledComponents";
 import { RootState } from '../redux/store';
-import { Character, MainPageProps } from "../interfaces";
-
-
-type TSelected = {
-    charactersInfoReducer: {
-        characters: {
-            info: {
-                pages: number,
-                next: string,
-                prev: string
-            },
-            results: [{
-                id: number,
-                name: string,
-                image: string,
-                status: string,
-                gender: string,
-                species: string,
-                location: {
-                    name: string;
-                },
-            }]
-        }
-    }
-};
+import { Character, MainPageProps, TSelected } from "../models";
 
 
 
@@ -64,7 +40,7 @@ const MainPage: React.FC<MainPageProps> = () => {
 
     React.useEffect(() => {
         const options = {
-            rootMargin: "400px",
+            rootMargin: "700px",
             threshold: 0.25
         };
 
@@ -81,8 +57,8 @@ const MainPage: React.FC<MainPageProps> = () => {
         <>
             <div className="charactersList"  >
                 {
-                    charactersInfo.map((character: Character) => (
-                        Object.keys(character).length ? <CharacterCard key={character.id} character={character} /> : null
+                    charactersInfo.map((character: Character, idx: number) => (
+                        idx ? <CharacterCard key={character.id} character={character} /> : null
                     ))
 
                 }

@@ -1,15 +1,31 @@
 import { SET_CHARACTERS } from "../actions/actions";
-import { CharactersAction } from "../../interfaces";
+import { CharactersAction, charactersInfoState } from "../../models";
 
-const initialState = {
+const initialState: charactersInfoState = {
   characters: {
-    info: { next: "1" },
-    results: [{}],
+    info: {
+      pages: 10,
+      next: "1",
+      prev: "1",
+    },
+    results: [
+      {
+        id: 1,
+        name: "",
+        image: "",
+        status: "",
+        gender: "",
+        species: "",
+        location: {
+          name: "",
+        },
+      },
+    ],
   },
 };
 
 export const charactersInfoReducer = (
-  state = initialState,
+  state: charactersInfoState = initialState,
   action: CharactersAction
 ) => {
   switch (action.type) {
