@@ -29,4 +29,9 @@ const Loader = styled.div`
     width: 100%;
     height: 170px;
     `;
-export { StyledImage, StyledLink, StyledSubTitle, Loader }
+const LoaderCenter = styled.div`
+    position: absolute; 
+    top: 50%;
+    left: 50%; 
+    `;
+export { StyledImage, StyledLink, StyledSubTitle, Loader, LoaderCenter }

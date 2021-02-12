@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchById } from "../redux/actions/actions";
 import { Link } from 'react-router-dom';
-import { StyledLink, StyledImage, StyledSubTitle } from "../components/StyledComponents";
+import { StyledLink, StyledImage, StyledSubTitle, LoaderCenter } from "../components/StyledComponents";
 import { ArrowBack } from "@styled-icons/boxicons-regular";
 import { RootState } from '../redux/store';
 import { Match } from "../interfaces";
@@ -47,7 +47,7 @@ const AdditionalInfoPage: React.FC<Match> = ({ match }) => {
                 </div>
             </div>) : (<>
                 <StyledLink as={Link} to="/"><ArrowBack size={18} /> Back</StyledLink>
-                <div className="lds-dual-ring" style={{ position: "absolute", top: "50%", left: "50%" }}></div>
+                <LoaderCenter className="lds-dual-ring" />
             </>)
     )
 }
