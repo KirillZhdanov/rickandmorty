@@ -36,21 +36,27 @@ const MainPage: React.FC<MainPageProps> = () => {
     const charactersApiInfo = useSelector((state: RootState | TSelected) => state.charactersInfoReducer.characters);
     const charactersInfo = charactersApiInfo.results;
     const fetchInfo = charactersApiInfo.info;
-    const nextPage = Number(fetchInfo?.next?.match(/\d+/g) || 1);
+    const nextPage = Number(fetchInfo?.next?.match(/\d+/g));
     const dispatch = useDispatch();
     const loader = React.useRef<HTMLDivElement | null>(null);
-
+    const [visible, setVisible] = React.useState(true)
     const onScroll = () => {
-        if (Number(fetchInfo?.pages) >= Number(fetchInfo?.next?.match(/\d+/g)) && fetchInfo?.next?.match(/\d+/g))
+        if (Number(fetchInfo?.pages) >= nextPage && nextPage) {
             dispatch(fetchCharacters(nextPage));
-        if (!fetchInfo?.pages)
+        }
+        if (!fetchInfo?.pages) {
             dispatch(fetchCharacters(1));
+        }
+
     }
     const loadMore = React.useCallback((entries) => {
 
         const target = entries[0];
         if (target.isIntersecting && nextPage) {
             onScroll();
+        }
+        if (Number(fetchInfo?.pages) && !nextPage) {
+            setVisible(false)
         }
     }, [fetchCharacters, loader.current, onScroll]);
 
@@ -63,6 +69,7 @@ const MainPage: React.FC<MainPageProps> = () => {
         };
 
         const observer = new IntersectionObserver(loadMore, options);
+
         const currentLoader = loader.current;
         if (loader && currentLoader) {
             observer.observe(currentLoader);
@@ -81,7 +88,7 @@ const MainPage: React.FC<MainPageProps> = () => {
                 }
 
             </div>
-            <Loader ref={loader}><div className="lds-dual-ring"></div></Loader>
+            {visible ? (<Loader ref={loader}><div className="lds-dual-ring"></div></Loader>) : null}
         </>
     )
 }
