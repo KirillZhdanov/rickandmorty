@@ -5,13 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCharacters } from "../../redux/actions/actions";
 import { Loader } from "../../components/StyledComponents";
 import { RootState } from '../../redux/store';
-import { TSelected } from "../../models";
 import { Character, MainPageProps } from "./types";
 
 
 
 const MainPage: React.FC<MainPageProps> = () => {
-    const charactersApiInfo = useSelector((state: RootState) => state.charactersInfoReducer.characters);
+    const charactersApiInfo = useSelector((state: RootState) => state.charactersInfoReducer);
     const charactersInfo = charactersApiInfo.results;
     const fetchInfo = charactersApiInfo.info;
     const nextPage = Number(fetchInfo?.next?.match(/\d+/g));
@@ -28,7 +27,6 @@ const MainPage: React.FC<MainPageProps> = () => {
 
     }
     const loadMore = React.useCallback((entries) => {
-
         const target = entries[0];
         if (target.isIntersecting && nextPage) {
             onScroll();
@@ -38,16 +36,12 @@ const MainPage: React.FC<MainPageProps> = () => {
         }
     }, [fetchCharacters, loader.current, onScroll]);
 
-
-
     React.useEffect(() => {
         const options = {
             rootMargin: "700px",
             threshold: 0.25
         };
-
         const observer = new IntersectionObserver(loadMore, options);
-
         const currentLoader = loader.current;
         if (loader && currentLoader) {
             observer.observe(currentLoader);

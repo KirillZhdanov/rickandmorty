@@ -3,8 +3,8 @@ import { charactersInfoReducer } from "./charactersInfoReducer";
 import { characterByIDReducer } from "./characterByIDReducer";
 
 const rootReducer = combineReducers({
-  charactersInfoReducer,
   characterByIDReducer,
+  charactersInfoReducer,
 });
 
 export default rootReducer;

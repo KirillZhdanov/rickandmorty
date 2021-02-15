@@ -15,8 +15,8 @@ export interface Card {
 export interface CharactersAction {
   type: string;
   payload: {
-    info: {};
-    results: [{}];
+    info: CharacterInfo;
+    results: Character[];
   };
 }
 export interface CharacterByIdAction {
@@ -26,8 +26,8 @@ export interface CharacterByIdAction {
   };
 }
 export interface CharactersActionPayload {
-  info: {};
-  results: [{}];
+  info: CharacterInfo;
+  results: Character[];
 }
 export interface CharacterByIdActionPayload {
   id: number;
@@ -51,63 +51,14 @@ export interface Character {
     name: string;
   };
 }
-export type RouteParams = { id: string };
-export type TSelectedById = {
-  characterByIDReducer: {
-    id: number;
-    name: string;
-    image: string;
-    status: string;
-    gender: string;
-    species: string;
-    location: {
-      name: string;
-    };
-  };
-};
-export type TSelected = {
-  charactersInfoReducer: {
-    characters: {
-      info: {
-        pages: number;
-        next: string;
-        prev: string;
-      };
-      results: [
-        {
-          id: number;
-          name: string;
-          image: string;
-          status: string;
-          gender: string;
-          species: string;
-          location: {
-            name: string;
-          };
-        }
-      ];
-    };
-  };
-};
-
-export interface charactersInfoState {
-  characters: {
-    info: {
-      pages: number;
-      next: string;
-      prev: string;
-    };
-    results: charactersInfoStateResult[];
-  };
+export interface CharacterInfo {
+  pages: number;
+  next?: string;
+  prev?: string;
 }
-export interface charactersInfoStateResult {
-  id: number;
-  name: string;
-  image: string;
-  status: string;
-  gender: string;
-  species: string;
-  location: {
-    name: string;
-  };
+export type RouteParams = { id: string };
+
+export interface CharactersInfoState {
+  info: CharacterInfo;
+  results: Character[];
 }
