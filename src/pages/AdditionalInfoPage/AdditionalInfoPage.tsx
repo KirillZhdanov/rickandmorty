@@ -1,16 +1,16 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchById } from "../redux/actions/actions";
+import { fetchById } from "../../redux/actions/actions";
 import { Link } from 'react-router-dom';
-import { StyledLink, StyledImage, StyledSubTitle, LoaderCenter } from "../components/StyledComponents";
+import { StyledLink, StyledImage, StyledSubTitle, LoaderCenter } from "../../components/StyledComponents";
 import { ArrowBack } from "@styled-icons/boxicons-regular";
-import { RootState } from '../redux/store';
-import { Match, TSelectedById } from "../models";
+import { RootState } from '../../redux/store';
+import { Match } from "./types";
 
 
 
 const AdditionalInfoPage: React.FC<Match> = ({ match }) => {
-    const character = useSelector((state: RootState | TSelectedById) => state.characterByIDReducer);
+    const character = useSelector((state: RootState) => state.characterByIDReducer);
     const dispatch = useDispatch();
 
     const visible = (character.name.length > 0);

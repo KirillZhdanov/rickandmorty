@@ -11,22 +11,7 @@ export interface Card {
     };
   };
 }
-export interface Match {
-  match: {
-    url: string;
-  };
-}
-export interface Character {
-  id: number;
-  name: string;
-  image: string;
-  status: string;
-  gender: string;
-  species: string;
-  location: {
-    name: string;
-  };
-}
+
 export interface CharactersAction {
   type: string;
   payload: {
@@ -55,24 +40,15 @@ export interface Id {
   type: string;
   id: number;
 }
-export interface MainPageProps {
-  charactersInfo: [
-    {
-      id: number;
-      name: string;
-      image: string;
-      status: string;
-      gender: string;
-      species: string;
-      location: {
-        name: string;
-      };
-    }
-  ];
-  fetchInfo: {
-    pages: number;
-    next: string;
-    prev: string;
+export interface Character {
+  id: number;
+  name: string;
+  image: string;
+  status: string;
+  gender: string;
+  species: string;
+  location: {
+    name: string;
   };
 }
 export type RouteParams = { id: string };
@@ -121,18 +97,17 @@ export interface charactersInfoState {
       next: string;
       prev: string;
     };
-    results: [
-      {
-        id: number;
-        name: string;
-        image: string;
-        status: string;
-        gender: string;
-        species: string;
-        location: {
-          name: string;
-        };
-      }
-    ];
+    results: charactersInfoStateResult[];
+  };
+}
+export interface charactersInfoStateResult {
+  id: number;
+  name: string;
+  image: string;
+  status: string;
+  gender: string;
+  species: string;
+  location: {
+    name: string;
   };
 }

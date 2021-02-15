@@ -33,7 +33,7 @@ export const charactersInfoReducer = (
       return {
         ...state,
         characters: {
-          info: action.payload.info,
+          info: { ...action.payload.info },
           results: [...state.characters.results, ...action.payload.results],
         },
       };

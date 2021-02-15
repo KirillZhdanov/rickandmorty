@@ -1,15 +1,17 @@
 import React from 'react';
-import CharacterCard from "../components/CharacterCard";
+import { Link } from 'react-router-dom'
+import CharacterCard from "../../components/CharacterCard";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCharacters } from "../redux/actions/actions";
-import { Loader } from "../components/StyledComponents";
-import { RootState } from '../redux/store';
-import { Character, MainPageProps, TSelected } from "../models";
+import { fetchCharacters } from "../../redux/actions/actions";
+import { Loader } from "../../components/StyledComponents";
+import { RootState } from '../../redux/store';
+import { TSelected } from "../../models";
+import { Character, MainPageProps } from "./types";
 
 
 
 const MainPage: React.FC<MainPageProps> = () => {
-    const charactersApiInfo = useSelector((state: RootState | TSelected) => state.charactersInfoReducer.characters);
+    const charactersApiInfo = useSelector((state: RootState) => state.charactersInfoReducer.characters);
     const charactersInfo = charactersApiInfo.results;
     const fetchInfo = charactersApiInfo.info;
     const nextPage = Number(fetchInfo?.next?.match(/\d+/g));
@@ -58,8 +60,9 @@ const MainPage: React.FC<MainPageProps> = () => {
             <div className="charactersList"  >
                 {
                     charactersInfo.map((character: Character, idx: number) => (
-                        idx ? <CharacterCard key={character.id} character={character} /> : null
-                    ))
+                        idx ? <Link to={`${character.id}`} style={{ display: "block" }} className="character" ><CharacterCard key={character.id} character={character} /></Link> : null
+                    )
+                    )
 
                 }
 

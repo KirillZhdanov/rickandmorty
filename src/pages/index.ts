@@ -1,4 +1,4 @@
-import AdditionalInfoPage from "./AdditionalInfoPage";
-import MainPage from "./MainPage";
+import AdditionalInfoPage from "./AdditionalInfoPage/AdditionalInfoPage";
+import MainPage from "./MainPage/MainPage";
 
 export { MainPage, AdditionalInfoPage };
